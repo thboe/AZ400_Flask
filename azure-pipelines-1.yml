@@ -9,4 +9,4 @@ trigger:
 pool:
   name: az_agent
 steps:
-- bash: echo "Hello world"
+- powershell: Write-Output "Hello orld"
