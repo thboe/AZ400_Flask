@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: az_agent
+  name: az_agent
 
 strategy:
   matrix:
