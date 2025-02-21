@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  name: az_agent
+  name: 'default'
 
 strategy:
   matrix:
