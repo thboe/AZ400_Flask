@@ -11,11 +11,28 @@ pool:
 
 jobs:
   - job: SetupPython
-    displayName: 'Set up Python'
+    displayName: 'Run tests with Python 3.13 on Windows'
     steps:
-      - task: UsePythonVersion@0
+      - task: PowerShell@2
         inputs:
-          versionSpec: '3.13'
-        displayName: 'Use Python 3.13'
+          targetType: 'inline'
+          script: |
+            python --version
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+        displayName: 'Install dependencies'
+        
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            pip install pytest pytest-azurepipelines
+            pytest
+        displayName: 'Run pytest'
 
-
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            Write-Host "Tests completed!"
+        displayName: 'Post-test message'
